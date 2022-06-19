@@ -1,0 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ConsoleApp57
+{
+    class Employe:Human
+    {
+        public string Position { get; set; }
+        public Employe(string position,string name):base(name)
+        {
+            Position = position;
+        }
+    }
+}

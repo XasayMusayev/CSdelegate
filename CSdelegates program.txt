@@ -1,0 +1,177 @@
+using System;
+using System.Collections.Generic;
+
+namespace ConsoleApp57
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Employe> employes= new List<Employe>();
+            List<Student> students = new List<Student>();
+            while (true)
+            {
+
+
+
+                Color.PrintLine(ConsoleColor.Yellow, "1-Student elave et");
+                Color.PrintLine(ConsoleColor.Yellow, "2-Employe elave et");
+                Color.PrintLine(ConsoleColor.Yellow, "3-Axtaris et");
+                Color.PrintLine(ConsoleColor.Yellow, "4-Cixis menusu gelsin");
+
+                string secim = Console.ReadLine();
+                if (secim == "4") break;
+                switch (secim)
+                {
+                    case "1":
+                        Console.WriteLine("Studentin adini daxil edin");
+                        NAMES:
+                        string namesstr = Console.ReadLine();
+                        if (string.IsNullOrWhiteSpace(namesstr))
+                        {
+                            Color.PrintLine(ConsoleColor.DarkRed, "ad daxil edilmedi -_-");
+                            goto NAMES;
+                        }
+                        Console.WriteLine("Studentin soyadini daxil edin");
+                        SURNAMES:
+                        string surnamesstr = Console.ReadLine();
+                        if (string.IsNullOrWhiteSpace(surnamesstr))
+                        {
+                            Color.PrintLine(ConsoleColor.DarkRed, "soyad daxil edilmedi -_-");
+                            goto SURNAMES;
+                        }
+                        Console.WriteLine("Studentin age-ini daxil edin");
+                        AGES:
+                        string agesstr = Console.ReadLine();
+                        bool isage = int.TryParse(agesstr, out int ages);
+                        if (!isage)
+                        {
+                            Color.PrintLine(ConsoleColor.DarkRed, "Age duzgun daxil edilmedi");
+                            goto AGES;
+                        }
+                        Console.WriteLine("Studentin grade-ini daxil edin");
+                        GRADE:
+                        string gradesstr = Console.ReadLine();
+                        bool isgrades = int.TryParse(gradesstr, out int grades);
+                        if (!isgrades)
+                        {
+                            Color.PrintLine(ConsoleColor.DarkRed, "Grade duzgun daxil edilmedi");
+                            goto GRADE;
+                        }
+                        Student student = new Student(grades, namesstr);
+                        student.Age = ages;
+                        student.Surname = surnamesstr;
+                        students.Add(student);
+                        Color.PrintLine(ConsoleColor.Green, "Student yaradildi ^_^ ");
+                        
+
+                        break;
+                    case "2":
+                        Console.WriteLine("Employenin adini daxil edin");
+                        NAMEE:
+                        string nameestr = Console.ReadLine();
+                        if (string.IsNullOrWhiteSpace(nameestr))
+                        {
+                            Color.PrintLine(ConsoleColor.DarkRed, "ad daxil edilmedi -_-");
+                            goto NAMEE;
+                        }
+                        Console.WriteLine("Employenin soyadini daxil edin");
+                        SURNAMEE:
+                        string surnameestr = Console.ReadLine();
+                        if (string.IsNullOrWhiteSpace(surnameestr))
+                        {
+                            Color.PrintLine(ConsoleColor.DarkRed, "soyad daxil edilmedi -_-");
+                            goto SURNAMEE;
+                        }
+                        Console.WriteLine("Employenin age -ini daxil edin");
+                        AGEE:
+                        string ageestr = Console.ReadLine();
+                        bool isagee = int.TryParse(ageestr, out int agee);
+                        if (!isagee)
+                        {
+                            Color.PrintLine(ConsoleColor.DarkRed, "age-i dzugun daxil edin -_-");
+                            goto AGEE;
+                        }
+                        Console.WriteLine("Employenin positionunu qeyd edin ");
+                        string positione = Console.ReadLine();
+                        Employe employe = new Employe(positione, nameestr);
+                        employe.Age = agee;
+                        employe.Surname = surnameestr;
+                        employes.Add(employe);
+                        Color.PrintLine(ConsoleColor.Green, "Employe yaradildi :) ");
+
+                        break;
+                    case "3":
+                        Color.PrintLine(ConsoleColor.Cyan, "Axtaris etmek istediyin bolmeni secin");
+                        MENYUYA:
+                        Color.PrintLine(ConsoleColor.Green, "--1--Employe uzre axtaris");
+                        Color.PrintLine(ConsoleColor.Green, "--2--Student uzre axtaris");
+                        Color.PrintLine(ConsoleColor.Green, "--3--Esas menyuya qayit ! ");
+                        string bolme = Console.ReadLine();
+                        switch (bolme)
+                        {
+                            case "1":
+                                Console.WriteLine("Iscinin positionunu qeyd edin ! ");
+                                string positionistr = Console.ReadLine();
+                                if (string.IsNullOrWhiteSpace(positionistr))
+                                {
+                                    Color.PrintLine(ConsoleColor.DarkRed, "Positionu duzgun daxil edin :/ ");
+                                }
+                                List<Employe> employes1 = employes.FindAll((x) => x.Position.ToUpper().Contains(positionistr.ToUpper()));
+                                foreach (var item in employes1)
+                                {
+                                    Color.PrintLine(ConsoleColor.Green, $"{item.Name}   {item.Surname}  {item.Position}");
+
+                                }
+
+                                goto MENYUYA;
+                            case "2":
+                                Console.WriteLine("Studentlerin minGrade ve maxGrade qiymetini qeyd edin ~_~ ");
+                                Color.PrintLine(ConsoleColor.Green, "minGrade daxil edin");
+                            MINGRADE:
+                                string mingradesstr = Console.ReadLine();
+                                bool ismingrade = int.TryParse(mingradesstr, out int mmingrades);
+                                if (!ismingrade)
+                                {
+                                    Color.PrintLine(ConsoleColor.DarkRed, "minGradeni duzgun daxil edin -_- ");
+                                    goto MINGRADE;
+                                }
+                                Color.PrintLine(ConsoleColor.Green, "maxGrade daxil edin");
+                            MAXGRADE:
+                                string maxgradesstr = Console.ReadLine();
+                                bool ismaxgrade = int.TryParse(maxgradesstr, out int maxgrades);
+                                if (!ismaxgrade)
+                                {
+                                    Color.PrintLine(ConsoleColor.DarkRed, "maxGradeni duzgun daxil edin -_- ");
+                                    goto MAXGRADE;
+
+
+                                }
+                                List<Student> students1 = students.FindAll((x) => x.Grade >= mmingrades && x.Grade <= maxgrades);
+                                foreach (var item in students1)
+                                {
+                                    Color.PrintLine(ConsoleColor.Green, $" {item.Name} {item.Grade}");
+                                }
+                                goto MENYUYA;
+
+                            case "3":
+                                break;
+                            default:
+                                Color.PrintLine(ConsoleColor.DarkRed, "Duzgun secim edin -_- !");
+                                goto MENYUYA;
+
+                        }
+
+                        break;
+                    default:
+                        Color.PrintLine(ConsoleColor.DarkRed, "Duzgun secim edin -_- !");
+
+
+                        break;
+
+                }
+            }
+
+        }
+    }
+}

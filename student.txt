@@ -1,0 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ConsoleApp57
+{
+    class Student : Human
+    {
+        public int Grade { get; set; }
+        public Student(int grade,string name) : base(name)
+        {
+            Grade = grade;
+        }
+    }
+}

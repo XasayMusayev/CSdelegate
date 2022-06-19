@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace ConsoleApp57
+{
+    class Color
+    {
+        public static void PrintLine(ConsoleColor color, object text)
+        {
+            Console.ForegroundColor = color;
+            Console.WriteLine(text);
+            Console.ResetColor();
+        }
+        public static void Print(ConsoleColor color, object text)
+        {
+            Console.ForegroundColor = color;
+            Console.Write(text);
+            Console.ResetColor();
+        }
+
+
+    }
+}
